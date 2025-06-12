@@ -8,7 +8,7 @@ services:
     startCommand: mix phx.server
     envVars:
       - key: PHX_HOST
-        value: global-chat.onrender.com
+        value: global-chat-gikj.onrender.com
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: PORT
