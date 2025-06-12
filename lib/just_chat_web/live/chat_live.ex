@@ -1,8 +1,8 @@
-defmodule GlobalChatWeb.ChatLive do
-  import GlobalChatWeb.Components.{RoomModal, Header, ChatInput}
-  import GlobalChat.Rooms, only: [validate_room_name: 1]
+defmodule JustChatWeb.ChatLive do
+  import JustChatWeb.Components.{RoomModal, Header, ChatInput}
+  import JustChat.Rooms, only: [validate_room_name: 1]
 
-  use GlobalChatWeb, :live_view
+  use JustChatWeb, :live_view
   alias Phoenix.PubSub
 
   # Mount for /channel/:id
@@ -19,7 +19,7 @@ defmodule GlobalChatWeb.ChatLive do
     channel = "room:#{id}"
     socket_id = System.system_time(:nanosecond)
 
-    PubSub.subscribe(GlobalChat.PubSub, channel)
+    PubSub.subscribe(JustChat.PubSub, channel)
 
     {
       :ok,
@@ -86,7 +86,7 @@ defmodule GlobalChatWeb.ChatLive do
     sender_id = socket.assigns.socket_id
     now = DateTime.utc_now()
 
-    PubSub.broadcast(GlobalChat.PubSub, channel, {:new_msg, msg, sender_id, now})
+    PubSub.broadcast(JustChat.PubSub, channel, {:new_msg, msg, sender_id, now})
 
     {:noreply, socket}
   end

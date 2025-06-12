@@ -1,4 +1,4 @@
-defmodule GlobalChatWeb.Components.ChatInput do
+defmodule JustChatWeb.Components.ChatInput do
   use Phoenix.Component
 
   attr :input, :string, required: true

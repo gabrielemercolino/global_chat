@@ -1,4 +1,4 @@
-defmodule GlobalChat.Application do
+defmodule JustChat.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,20 +8,20 @@ defmodule GlobalChat.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      GlobalChatWeb.Telemetry,
-      {DNSCluster, query: Application.get_env(:global_chat, :dns_cluster_query) || :ignore},
-      {Phoenix.PubSub, name: GlobalChat.PubSub},
+      JustChatWeb.Telemetry,
+      {DNSCluster, query: Application.get_env(:just_chat, :dns_cluster_query) || :ignore},
+      {Phoenix.PubSub, name: JustChat.PubSub},
       # Start the Finch HTTP client for sending emails
-      {Finch, name: GlobalChat.Finch},
-      # Start a worker by calling: GlobalChat.Worker.start_link(arg)
-      # {GlobalChat.Worker, arg},
+      {Finch, name: JustChat.Finch},
+      # Start a worker by calling: JustChat.Worker.start_link(arg)
+      # {JustChat.Worker, arg},
       # Start to serve requests, typically the last entry
-      GlobalChatWeb.Endpoint
+      JustChatWeb.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: GlobalChat.Supervisor]
+    opts = [strategy: :one_for_one, name: JustChat.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
@@ -29,7 +29,7 @@ defmodule GlobalChat.Application do
   # whenever the application is updated.
   @impl true
   def config_change(changed, _new, removed) do
-    GlobalChatWeb.Endpoint.config_change(changed, removed)
+    JustChatWeb.Endpoint.config_change(changed, removed)
     :ok
   end
 end

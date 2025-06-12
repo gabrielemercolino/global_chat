@@ -1,14 +1,14 @@
-defmodule GlobalChatWeb.Layouts do
+defmodule JustChatWeb.Layouts do
   @moduledoc """
   This module holds different layouts used by your application.
 
   See the `layouts` directory for all templates available.
   The "root" layout is a skeleton rendered as part of the
   application router. The "app" layout is set as the default
-  layout on both `use GlobalChatWeb, :controller` and
-  `use GlobalChatWeb, :live_view`.
+  layout on both `use JustChatWeb, :controller` and
+  `use JustChatWeb, :live_view`.
   """
-  use GlobalChatWeb, :html
+  use JustChatWeb, :html
 
   embed_templates "layouts/*"
 end

@@ -1,11 +1,11 @@
-defmodule GlobalChatWeb.Router do
-  use GlobalChatWeb, :router
+defmodule JustChatWeb.Router do
+  use JustChatWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, html: {GlobalChatWeb.Layouts, :root}
+    plug :put_root_layout, html: {JustChatWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,7 +14,7 @@ defmodule GlobalChatWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", GlobalChatWeb do
+  scope "/", JustChatWeb do
     pipe_through :browser
 
     live "/", ChatLive
@@ -22,12 +22,12 @@ defmodule GlobalChatWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", GlobalChatWeb do
+  # scope "/api", JustChatWeb do
   #   pipe_through :api
   # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
-  if Application.compile_env(:global_chat, :dev_routes) do
+  if Application.compile_env(:just_chat, :dev_routes) do
     # If you want to use the LiveDashboard in production, you should put
     # it behind authentication and allow only admins to access it.
     # If your application does not have an admins-only section yet,
@@ -38,7 +38,7 @@ defmodule GlobalChatWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
-      live_dashboard "/dashboard", metrics: GlobalChatWeb.Telemetry
+      live_dashboard "/dashboard", metrics: JustChatWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
   end

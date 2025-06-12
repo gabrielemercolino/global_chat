@@ -1,6 +1,6 @@
-defmodule GlobalChat do
+defmodule JustChat do
   @moduledoc """
-  GlobalChat keeps the contexts that define your domain
+  JustChat keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

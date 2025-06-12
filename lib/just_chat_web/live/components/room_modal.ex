@@ -1,4 +1,4 @@
-defmodule GlobalChatWeb.Components.RoomModal do
+defmodule JustChatWeb.Components.RoomModal do
   use Phoenix.Component
 
   attr :error, :string

@@ -1,4 +1,4 @@
-# GlobalChat
+# JustChat
 
 To start your Phoenix server:
 

@@ -1,9 +1,9 @@
-defmodule GlobalChat.MixProject do
+defmodule JustChat.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :global_chat,
+      app: :just_chat,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule GlobalChat.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {GlobalChat.Application, []},
+      mod: {JustChat.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -68,10 +68,10 @@ defmodule GlobalChat.MixProject do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind global_chat", "esbuild global_chat"],
+      "assets.build": ["tailwind just_chat", "esbuild just_chat"],
       "assets.deploy": [
-        "tailwind global_chat --minify",
-        "esbuild global_chat --minify",
+        "tailwind just_chat --minify",
+        "esbuild just_chat --minify",
         "phx.digest"
       ]
     ]

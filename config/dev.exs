@@ -6,7 +6,7 @@ import Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :global_chat, GlobalChatWeb.Endpoint,
+config :just_chat, JustChatWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   # http: [ip: {127, 0, 0, 1}, port: 4000],
@@ -16,8 +16,8 @@ config :global_chat, GlobalChatWeb.Endpoint,
   debug_errors: true,
   secret_key_base: "A5L+AclVqfmLyIPmj0+bQ6GmF0Ps+Jo6AYboh4hqBvl13H4IzSDeRA0+KrP8i2ma",
   watchers: [
-    esbuild: {Esbuild, :install_and_run, [:global_chat, ~w(--sourcemap=inline --watch)]},
-    tailwind: {Tailwind, :install_and_run, [:global_chat, ~w(--watch)]}
+    esbuild: {Esbuild, :install_and_run, [:just_chat, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:just_chat, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -44,17 +44,17 @@ config :global_chat, GlobalChatWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :global_chat, GlobalChatWeb.Endpoint,
+config :just_chat, JustChatWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/global_chat_web/(controllers|live|components)/.*(ex|heex)$"
+      ~r"lib/just_chat_web/(controllers|live|components)/.*(ex|heex)$"
     ]
   ]
 
 # Enable dev routes for dashboard and mailbox
-config :global_chat, dev_routes: true
+config :just_chat, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

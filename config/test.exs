@@ -2,13 +2,13 @@ import Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :global_chat, GlobalChatWeb.Endpoint,
+config :just_chat, JustChatWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "VRe91CHPRFuj6Cu0oTPzAXVFw/C2tuMo3No1exDn0VmRqxzrk374asPmTWUX4fDU",
   server: false
 
 # In test we don't send emails
-config :global_chat, GlobalChat.Mailer, adapter: Swoosh.Adapters.Test
+config :just_chat, JustChat.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters
 config :swoosh, :api_client, false

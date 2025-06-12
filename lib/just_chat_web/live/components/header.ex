@@ -1,4 +1,4 @@
-defmodule GlobalChatWeb.Components.Header do
+defmodule JustChatWeb.Components.Header do
   use Phoenix.Component
 
   attr :version, :string, required: true
@@ -18,7 +18,7 @@ defmodule GlobalChatWeb.Components.Header do
         </div>
 
         <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-          <a href="https://github.com/gabrielemercolino/global_chat" class="hover:text-zinc-700">
+          <a href="https://github.com/gabrielemercolino/just_chat" class="hover:text-zinc-700">
             GitHub
           </a>
         </div>
