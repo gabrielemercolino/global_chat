@@ -4,8 +4,6 @@ services:
     runtime: elixir
     plan: free
     region: frankfurt
-    branch: main
-    repo: https://github.com/gabrielemercolino/global_chat
     buildCommand: ./build.sh
     startCommand: mix phx.server
     envVars:
