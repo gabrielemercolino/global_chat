@@ -7,8 +7,6 @@ services:
     buildCommand: ./build.sh
     startCommand: mix phx.server
     envVars:
-      - key: PHX_HOST
-        value: just-chat.onrender.com
       - key: SECRET_KEY_BASE
         generateValue: true
       - key: PORT
