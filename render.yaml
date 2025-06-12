@@ -1,7 +1,7 @@
 services:
   - type: web
     name: global-chat
-    env: elixir
+    runtime: elixir
     plan: free
     region: frankfurt
     branch: main
