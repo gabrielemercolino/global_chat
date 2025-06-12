@@ -12,20 +12,21 @@
   <div 
     id="messages"
     phx-hook="AutoScroll"
+    phx-update="stream"
     class="min-h-[100dvh] pt-[3rem] pb-[72px] px-4 overflow-y-auto flex flex-col justify-end space-y-2"  
   >
-    <%= for msg <- @messages do %>
-      <div class={[
-        "max-w-[70%] p-2 rounded shadow-sm break-words",
-        msg.from_self && "ml-auto bg-blue-100 text-right",
-        !msg.from_self && "mr-auto bg-gray-100 text-left"
-      ]}>
-        <%= msg.body %>
-        <div class="text-xs text-gray-500 mt-1">
-          <%= msg.time %>
-        </div>
+    <div 
+    :for={{time, msg} <- @streams.messages} id={time}
+    class={[
+      "max-w-[70%] p-2 rounded shadow-sm break-words",
+      msg.from_self && "ml-auto bg-blue-100 text-right",
+      !msg.from_self && "mr-auto bg-gray-100 text-left"
+    ]}>
+      <%= msg.body %>
+      <div class="text-xs text-gray-500 mt-1">
+        {msg.time |> Calendar.strftime("%H:%M %Z")}
       </div>
-    <% end %>
+    </div>
   </div>
 </main>
 

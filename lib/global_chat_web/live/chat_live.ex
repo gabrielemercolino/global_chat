@@ -26,7 +26,8 @@ defmodule GlobalChatWeb.ChatLive do
       socket
       |> assign(id: id, socket_id: socket_id, channel: channel)
       |> assign(modal_error: nil, show_modal: false)
-      |> assign(input: "", messages: [])
+      |> assign(input: "")
+      |> stream(:messages, [])
     }
   end
 
@@ -83,7 +84,7 @@ defmodule GlobalChatWeb.ChatLive do
   def handle_event("send_msg", %{"message" => msg}, socket) do
     channel = socket.assigns.channel
     sender_id = socket.assigns.socket_id
-    now = DateTime.utc_now() |> Calendar.strftime("%H:%M %Z")
+    now = DateTime.utc_now()
 
     PubSub.broadcast(GlobalChat.PubSub, channel, {:new_msg, msg, sender_id, now})
 
@@ -93,11 +94,9 @@ defmodule GlobalChatWeb.ChatLive do
   def handle_info({:new_msg, msg, sender_id, time}, socket) do
     from_self = sender_id == socket.assigns.socket_id
 
-    new_msg = %{from_self: from_self, body: msg, time: time}
-    messages = socket.assigns.messages ++ [new_msg]
+    new_msg = %{from_self: from_self, body: msg, time: time, id: time}
 
-    socket = socket |> assign(:messages, messages)
-
+    socket = socket |> stream_insert(:messages, new_msg)
     {:noreply, socket}
   end
 end
