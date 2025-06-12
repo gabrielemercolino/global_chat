@@ -1,0 +1,34 @@
+<.top_bar 
+  version={Application.spec(:global_chat, :vsn)} 
+  channel={@id}
+  repo_link="github.com/gabrielemercolino/global_chat"
+/>
+
+<%= if @show_modal do %>
+<.room_modal error={@modal_error} />
+<% end %>
+
+<main class="w-full max-w-[800px] mx-auto px-4">
+  <div 
+    id="messages"
+    phx-hook="AutoScroll"
+    class="min-h-[100dvh] pt-[3rem] pb-[72px] px-4 overflow-y-auto flex flex-col justify-end space-y-2"  
+  >
+    <%= for msg <- @messages do %>
+      <div class={[
+        "max-w-[70%] p-2 rounded shadow-sm break-words",
+        msg.from_self && "ml-auto bg-blue-100 text-right",
+        !msg.from_self && "mr-auto bg-gray-100 text-left"
+      ]}>
+        <%= msg.body %>
+        <div class="text-xs text-gray-500 mt-1">
+          <%= msg.time %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>
+
+<footer class="w-full max-w-[800px] mx-auto fixed bottom-0 left-0 right-0 px-4 py-3 bg-white border-t">
+  <.chat_input input={@input} />
+</footer>
