@@ -5,7 +5,7 @@ services:
     plan: free
     region: frankfurt
     buildCommand: ./build.sh
-    startCommand: mix phx.server
+    startCommand: _build/prod/rel/just_chat/bin/server
     envVars:
       - key: SECRET_KEY_BASE
         generateValue: true
