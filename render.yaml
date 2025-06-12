@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: global-chat
+    env: elixir
+    plan: free
+    region: frankfurt
+    branch: main
+    repo: https://github.com/gabrielemercolino/global_chat
+    buildCommand: ./build.sh
+    startCommand: mix phx.server
+    envVars:
+      - key: PHX_HOST
+        value: global-chat.onrender.com
+      - key: SECRET_KEY_BASE
+        generateValue: true
+      - key: PORT
+        value: 10000
+      - key: MIX_ENV
+        value: prod
