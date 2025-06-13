@@ -48,13 +48,7 @@ defmodule JustChatWeb.ChatLive do
       room
       |> String.trim()
       |> validate_room_name()
-
-    error = case error do
-      :ok -> nil
-      :empty -> "Il nome del canale non può essere vuoto."
-      :too_long -> "Il nome del canale non può superare i 30 caratteri."
-      :invalid_characters -> "Il nome del canale può contenere solo lettere, numeri, - e _."
-    end
+      |> room_error_message()
 
     {:noreply, assign(socket, modal_error: error)}
   end
@@ -65,16 +59,9 @@ defmodule JustChatWeb.ChatLive do
     case validate_room_name(room) do
       :ok ->
         {:noreply, push_navigate(socket, to: ~p"/channel/#{room}", replace: true)}
-
-      :empty ->
-        {:noreply, assign(socket, modal_error: "Il nome del canale non può essere vuoto.")}
-      :too_long ->
-        {:noreply, assign(socket, modal_error: "Il nome del canale non può superare i 30 caratteri.")}
-      :invalid_characters ->
-        {:noreply, assign(socket, modal_error: "Il nome del canale può contenere solo lettere, numeri, - e _.")}
+      error ->
+        {:noreply, assign(socket, modal_error: room_error_message(error))}
     end
-
-
   end
 
   def handle_event("send_msg", %{"message" => ""}, socket) do
@@ -99,4 +86,11 @@ defmodule JustChatWeb.ChatLive do
     socket = socket |> stream_insert(:messages, new_msg)
     {:noreply, socket}
   end
+
+  defp room_error_message(:ok), do: nil
+  defp room_error_message(:empty), do: "Channel name can't be empty"
+  defp room_error_message(:too_long), do: "Channel name can't be more than 30 characters long"
+  defp room_error_message(:invalid_characters), do: "Channel name can only contain letters, numbers, - or _"
+  defp room_error_message(_), do: "An unknown error occurred"
+
 end
