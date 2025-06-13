@@ -1,28 +1,29 @@
-<.top_bar 
-  version={Application.spec(:just_chat, :vsn)} 
+<.top_bar
+  version={Application.spec(:just_chat, :vsn)}
   channel={@id}
   repo_link="github.com/gabrielemercolino/just_chat"
 />
-
 <%= if @show_modal do %>
-<.room_modal error={@modal_error} />
+  <.room_modal error={@modal_error} />
 <% end %>
 
 <main class="w-full max-w-[800px] mx-auto px-4">
-  <div 
+  <div
     id="messages"
     phx-hook="AutoScroll"
     phx-update="stream"
-    class="min-h-[100dvh] pt-[3rem] pb-[72px] px-4 overflow-y-auto flex flex-col justify-end space-y-2"  
+    class="min-h-[100dvh] pt-[3rem] pb-[72px] px-4 overflow-y-auto flex flex-col justify-end space-y-2"
   >
-    <div 
-    :for={{time, msg} <- @streams.messages} id={time}
-    class={[
-      "max-w-[70%] p-2 rounded shadow-sm break-words",
-      msg.from_self && "ml-auto bg-blue-100 text-right",
-      !msg.from_self && "mr-auto bg-gray-100 text-left"
-    ]}>
-      <%= msg.body %>
+    <div
+      :for={{time, msg} <- @streams.messages}
+      id={time}
+      class={[
+        "max-w-[70%] p-2 rounded shadow-sm break-words",
+        msg.from_self && "ml-auto bg-blue-100 text-right",
+        !msg.from_self && "mr-auto bg-gray-100 text-left"
+      ]}
+    >
+      {Phoenix.HTML.raw(linkify(msg.body))}
       <div class="text-xs text-gray-500 mt-1">
         {msg.time |> Calendar.strftime("%H:%M %Z")}
       </div>
