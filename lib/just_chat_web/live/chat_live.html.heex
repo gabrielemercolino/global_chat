@@ -23,7 +23,7 @@
         !msg.from_self && "mr-auto bg-gray-100 text-left"
       ]}
     >
-      {msg.body}
+      {Phoenix.HTML.raw(linkify(msg.body))}
       <div class="text-xs text-gray-500 mt-1">
         {msg.time |> Calendar.strftime("%H:%M %Z")}
       </div>
