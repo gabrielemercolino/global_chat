@@ -115,8 +115,6 @@ defmodule JustChatWeb.ChatLive do
         cond do
           String.starts_with?(url, "http://") or String.starts_with?(url, "https://") ->
             url
-          String.starts_with?(url, "www.") ->
-            "https://" <> url
           true ->
             "https://" <> url
         end
