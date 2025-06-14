@@ -100,14 +100,17 @@ defmodule JustChatWeb.ChatLive do
     # - Domain names with a TLD (e.g., example.com)
     # Also captures trailing punctuation like ., !, ?, ;, etc. so they can be preserved
     # and not included in the link.
-    regex =
+    link_regex =
       ~r/((https?:\/\/|www\.)[^\s<>"',!?:;\)\]\}]+|\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s<>"',!?:;\)\]\}]*)?)([.,!?:;\)\]\}]*)/
+
+    # Regex matches @mentions of rooms, allowing alphanumeric characters, underscores, and hyphens
+    room_regex = ~r/@([A-Za-z0-9_-]{1,30})/
 
     text
     |> html_escape()
     |> safe_to_string()
 
-    Regex.replace(regex, text, fn _full, url, _scheme, trailing ->
+    text = Regex.replace(link_regex, text, fn _full, url, _scheme, trailing ->
       href =
         cond do
           String.starts_with?(url, "http://") or String.starts_with?(url, "https://") ->
@@ -119,7 +122,11 @@ defmodule JustChatWeb.ChatLive do
         end
 
 
-      ~s(<a href="#{href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline break-all">#{url}</a>#{trailing})
+      ~s(<a href="#{href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline">#{url}</a>#{trailing})
+    end)
+
+    Regex.replace(room_regex, text, fn _full, room ->
+      ~s(<a href="/channel/#{room}" phx-link="redirect" phx-link-state="push" class="text-blue-600 underline">@#{room}</a>)
     end)
   end
 end
