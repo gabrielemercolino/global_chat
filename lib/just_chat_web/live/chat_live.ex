@@ -98,10 +98,11 @@ defmodule JustChatWeb.ChatLive do
     # - URLs starting with http:// or https://
     # - URLs starting with www.
     # - Domain names with a TLD (e.g., example.com)
+    # Captures query parameters and fragments (e.g., ?query=param#fragment)
     # Also captures trailing punctuation like ., !, ?, ;, etc. so they can be preserved
     # and not included in the link.
     link_regex =
-      ~r/((https?:\/\/|www\.)[^\s<>"',!?:;\)\]\}]+|\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[^\s<>"',!?:;\)\]\}]*)?)([.,!?:;\)\]\}]*)/
+    ~r/((https?:\/\/|www\.)[a-zA-Z0-9\-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;=%]+|\b[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(?:\/[a-zA-Z0-9\-\._~:\/\?#\[\]@!\$&'\(\)\*\+,;=%]*)?)([.,!?:;\)\]\}]*)/
 
     # Regex matches @mentions of rooms, allowing alphanumeric characters, underscores, and hyphens
     room_regex = ~r/@([A-Za-z0-9_-]{1,30})/
